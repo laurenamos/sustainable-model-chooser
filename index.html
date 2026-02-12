@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Sustainable Model Chooser (v0)</title>
+  <link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <div class="h1">Sustainable Model Chooser <span class="badge">v0</span></div>
+        <div class="sub">
+          A prototype comparison site for everyday chat users. It scores models using <b>verifiable inputs</b> (pricing + policy transparency),
+          and labels sustainability as <b>proxy/unknown</b> unless a vendor discloses it.
+        </div>
+      </div>
+      <div class="small">
+        Data snapshot: <span class="code" id="generatedAt">—</span>
+      </div>
+    </header>
+
+    <div class="panel">
+      <b>Mode</b>
+      <div class="small" style="margin-top:8px;line-height:1.6">
+        <label style="margin-right:14px"><input type="radio" name="mode" value="consumer" checked> Consumer chat</label>
+        <label><input type="radio" name="mode" value="api"> API / enterprise</label>
+        <div class="small" style="margin-top:8px">
+          This toggle changes which privacy citations/notes are used in scoring.
+          (Example: Google <span class="code">Vertex AI</span> terms ≠ consumer <span class="code">Gemini app</span> terms.)
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <b>Does OpenRouter list sustainability / privacy metrics?</b>
+      <div class="small" style="margin-top:6px;line-height:1.5">
+        OpenRouter’s public model list primarily includes: <span class="code">pricing</span>, <span class="code">context_length</span>, input/output modalities,
+        supported parameters, and a few provider flags (e.g. <span class="code">is_moderated</span>). It does <b>not</b> provide reliable per-model
+        <span class="code">CO2e</span>, <span class="code">kWh</span>, water usage, or retention/training policy fields. This site therefore links to vendor policy pages as citations.
+      </div>
+      <div class="small" style="margin-top:8px">OpenRouter sync timestamp: <span class="code" id="syncedAt">—</span></div>
+    </div>
+
+    <div class="panel">
+      <b>Scoring (v0)</b>
+      <ul class="small">
+        <li><b>Affordability (40)</b>: proxy from published $/MTok. Assumes a typical chat turn of <span class="code">1K input</span> + <span class="code">500 output</span> tokens.</li>
+        <li><b>Privacy & data controls (40)</b>: scored on clarity + citations + stated controls. Not legal advice.</li>
+        <li><b>Sustainability transparency (20)</b>: company/product reporting + ability to obtain customer-level emissions. No fake precision.</li>
+      </ul>
+      <div class="small">UX quality / speed testing is intentionally excluded for now.</div>
+    </div>
+
+    <div class="grid" id="cards"></div>
+
+    <div class="panel" id="table"></div>
+
+    <div class="panel footer">
+      <b>Notes</b>
+      <ul>
+        <li>This is a consumer-facing prototype. Pricing is from vendor API pages; consumer subscriptions may differ.</li>
+        <li>Some citations (e.g., Google Vertex AI) are enterprise/GCP oriented and may not match consumer chat app terms exactly.</li>
+        <li>We should add a separate mode: <span class="code">Consumer chat</span> vs <span class="code">API/enterprise</span> to avoid misleading comparisons.</li>
+      </ul>
+      <div class="small">Want next: a cleaner data model + a page per model + a public methodology page.</div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

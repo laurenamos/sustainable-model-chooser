@@ -1,0 +1,174 @@
+{
+  "generatedAt": "2026-02-12",
+  "openrouterSyncedAt": "2026-02-12T13:47:50.463254+00:00",
+  "models": [
+    {
+      "key": "openai-gpt-5-mini",
+      "displayName": "OpenAI: GPT-5 mini",
+      "provider": "OpenAI",
+      "chatSurface": "ChatGPT / OpenAI",
+      "openrouter": {
+        "id": "openai/gpt-5-mini",
+        "name": "OpenAI: GPT-5 Mini",
+        "context_length": 400000,
+        "is_moderated": true,
+        "pricing_per_token_usd": {
+          "prompt": 2.5e-07,
+          "completion": 2e-06,
+          "web_search": 0.01,
+          "input_cache_read": 2.5e-08
+        },
+        "pricing_per_mtok_usd": {
+          "prompt": 0.25,
+          "completion": 2.0,
+          "web_search": 10000.0,
+          "input_cache_read": 0.024999999999999998
+        },
+        "source": "https://openrouter.ai/api/v1/models",
+        "syncedAt": "2026-02-12T13:47:50.453204+00:00"
+      },
+      "pricing": {
+        "input_per_mtok_usd": 0.25,
+        "output_per_mtok_usd": 2.0,
+        "source": "https://openai.com/api/pricing/"
+      },
+      "privacy": {
+        "consumer": {
+          "notes": "OpenAI consumer privacy policy covers ChatGPT and describes collection/processing of user content. (We still need the specific help-center article about model training to score this more precisely.)",
+          "sources": [
+            "https://openai.com/policies/privacy-policy/",
+            "https://openai.com/policies/terms-of-use/"
+          ],
+          "confidence": "medium"
+        },
+        "api_enterprise": {
+          "notes": "Enterprise/API privacy commitments page is high-level; add business terms + API data usage citations later.",
+          "sources": [
+            "https://openai.com/enterprise-privacy/"
+          ],
+          "confidence": "low"
+        }
+      },
+      "sustainability": {
+        "notes": "No model-specific emissions disclosed in v0 sources.",
+        "sources": [],
+        "confidence": "low"
+      }
+    },
+    {
+      "key": "anthropic-sonnet-4-5",
+      "displayName": "Anthropic: Sonnet 4.5",
+      "provider": "Anthropic",
+      "chatSurface": "Claude",
+      "openrouter": {
+        "id": "anthropic/claude-sonnet-4.5",
+        "name": "Anthropic: Claude Sonnet 4.5",
+        "context_length": 1000000,
+        "is_moderated": false,
+        "pricing_per_token_usd": {
+          "prompt": 3e-06,
+          "completion": 1.5e-05,
+          "web_search": 0.01,
+          "input_cache_read": 3e-07,
+          "input_cache_write": 3.75e-06
+        },
+        "pricing_per_mtok_usd": {
+          "prompt": 3.0,
+          "completion": 15.0,
+          "web_search": 10000.0,
+          "input_cache_read": 0.3,
+          "input_cache_write": 3.75
+        },
+        "source": "https://openrouter.ai/api/v1/models",
+        "syncedAt": "2026-02-12T13:47:50.463226+00:00"
+      },
+      "pricing": {
+        "input_per_mtok_usd": 3.0,
+        "output_per_mtok_usd": 15.0,
+        "source": "https://claude.com/pricing"
+      },
+      "privacy": {
+        "consumer": {
+          "notes": "Policy states training data may include user-provided inputs/outputs unless users opt out.",
+          "sources": [
+            "https://www.anthropic.com/legal/privacy",
+            "https://www.anthropic.com/legal/non-user-privacy-policy"
+          ],
+          "confidence": "medium"
+        },
+        "api_enterprise": {
+          "notes": "Claude Team/Enterprise claims no model training on your content by default; verify with a dedicated policy citation before scoring higher.",
+          "sources": [
+            "https://claude.com/pricing"
+          ],
+          "confidence": "low"
+        }
+      },
+      "sustainability": {
+        "notes": "No comparable per-model CO2e disclosure found in v0 sources.",
+        "sources": [],
+        "confidence": "low"
+      }
+    },
+    {
+      "key": "google-gemini-2-5-flash",
+      "displayName": "Google: Gemini 2.5 Flash (Vertex AI pricing proxy)",
+      "provider": "Google",
+      "chatSurface": "Gemini",
+      "openrouter": {
+        "id": "google/gemini-2.5-flash",
+        "name": "Google: Gemini 2.5 Flash",
+        "context_length": 1048576,
+        "is_moderated": false,
+        "pricing_per_token_usd": {
+          "prompt": 3e-07,
+          "completion": 2.5e-06,
+          "image": 3e-07,
+          "audio": 1e-06,
+          "internal_reasoning": 2.5e-06,
+          "input_cache_read": 3e-08,
+          "input_cache_write": 8.333333333333334e-08
+        },
+        "pricing_per_mtok_usd": {
+          "prompt": 0.3,
+          "completion": 2.5,
+          "image": 0.3,
+          "audio": 1.0,
+          "internal_reasoning": 2.5,
+          "input_cache_read": 0.03,
+          "input_cache_write": 0.08333333333333334
+        },
+        "source": "https://openrouter.ai/api/v1/models",
+        "syncedAt": "2026-02-12T13:47:50.463249+00:00"
+      },
+      "pricing": {
+        "input_per_mtok_usd": 0.3,
+        "output_per_mtok_usd": 2.5,
+        "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+      },
+      "privacy": {
+        "consumer": {
+          "notes": "Google consumer privacy policy applies broadly across Google services. Gemini-specific consumer data handling still needs a tighter citation.",
+          "sources": [
+            "https://policies.google.com/privacy"
+          ],
+          "confidence": "low"
+        },
+        "api_enterprise": {
+          "notes": "Vertex AI docs: Google won't use your data to train/fine-tune without permission; discusses steps to achieve zero data retention.",
+          "sources": [
+            "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/vertex-ai-zero-data-retention"
+          ],
+          "confidence": "medium"
+        }
+      },
+      "sustainability": {
+        "notes": "Google publishes extensive sustainability reporting (company-level).",
+        "sources": [
+          "https://sustainability.google/stories/"
+        ],
+        "confidence": "medium"
+      }
+    }
+  ]
+}
