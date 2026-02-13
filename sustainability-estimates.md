@@ -36,10 +36,15 @@ These do **not** give you an official “CO2e per message”, but they are the m
   - https://arxiv.org/abs/1910.09700
 
 ## Efficiency benchmarks (systems-level)
-Benchmarks can compare **performance per watt**, but typically benchmark *systems/implementations* rather than attributing a footprint to a specific consumer chat model.
+Benchmarks can compare **performance per watt** (or **joules per token**), but typically benchmark *systems/implementations* or *open-weight models you can run*, rather than attributing a footprint to a specific consumer chat model behind a closed API.
 
 - **MLCommons / MLPerf Inference (Datacenter)**
   - https://mlcommons.org/benchmarks/inference-datacenter/
+
+- **TokenPowerBench (AAAI’26; arXiv:2512.03024)** — inference-focused benchmark that measures power without specialised external meters, aligns energy to **prefill vs decode**, and reports metrics like **joules per generated token**.
+  - Paper: https://arxiv.org/abs/2512.03024v1
+  - They report evaluations across widely used open(-ish) model series including **Llama**, **Qwen**, **Mistral**, and **Falcon**, covering scales from ~1B parameters up to **Llama3‑405B**.
+  - Note: this is an example of the kind of tooling needed; it does *not* currently provide an official rating for closed consumer models like GPT‑5 mini / Sonnet 4.5 / Gemini 2.5 Flash.
 
 ## Chat model use vs FIFO flights per year (rough equivalence)
 This is a *back-of-envelope* comparison to make the scale intuitive. It is **not** a precise accounting.
