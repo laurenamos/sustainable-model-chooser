@@ -10,10 +10,10 @@
   <div class="container">
     <header>
       <div>
-        <div class="h1">Sustainable Model Chooser <span class="badge">v0</span></div>
+        <div class="h1">Sustainable Model Chooser <span class="badge">beta</span></div>
         <div class="sub">
-          A prototype comparison site for everyday chat users. It scores models using <b>verifiable inputs</b> (pricing + policy transparency),
-          and labels sustainability as <b>proxy/unknown</b> unless a vendor discloses it.
+          Compare chat models using <b>verifiable inputs</b> (pricing + policy transparency) and <b>sustainability disclosure</b>.
+          We do <b>not</b> claim precise CO2e per message; the flights/year numbers are <b>illustrative proxies</b> with explicit assumptions.
         </div>
       </div>
       <div class="small">
@@ -40,7 +40,8 @@
         supported parameters, and a few provider flags (e.g. <span class="code">is_moderated</span>). It does <b>not</b> provide reliable per-model
         <span class="code">CO2e</span>, <span class="code">kWh</span>, water usage, or retention/training policy fields. This site therefore links to vendor policy pages as citations.
       </div>
-      <div class="small" style="margin-top:8px">OpenRouter sync timestamp: <span class="code" id="syncedAt">—</span></div>
+      <div class="small" style="margin-top:8px">OpenRouter pricing metadata synced: <span class="code" id="syncedAt">—</span></div>
+      <div class="small" style="margin-top:6px">Read more: <a href="./methodology.html">Methodology</a> • <a href="./sustainability.html">Sustainability notes</a></div>
     </div>
 
     <div class="panel">
@@ -89,14 +90,15 @@
     <div class="panel" id="table"></div>
 
     <div class="panel footer">
-      <b>Notes</b>
+      <b>Methodology & disclaimers</b>
       <ul>
-        <li>This is a consumer-facing prototype. Pricing is from vendor API pages; consumer subscriptions may differ.</li>
-        <li>Flights/year values shown on model cards are <b>illustrative proxies</b> based on token usage assumptions + proxy emissions tiers (not vendor-published CO2e/token).</li>
+        <li>Pricing shown is from vendor API pages; consumer subscriptions may differ.</li>
+        <li><b>Flights/year</b> is an <b>illustrative proxy</b> based on your slider settings + proxy emissions tiers (not vendor-published CO2e/token).</li>
         <li>Some citations (e.g., Google Vertex AI) are enterprise/GCP oriented and may not match consumer chat app terms exactly.</li>
-        <li>Mode toggle is live: <span class="code">Consumer chat</span> vs <span class="code">API/enterprise</span> (this changes which privacy citations/notes are used for scoring).</li>
+        <li>Mode toggle is live: <span class="code">Consumer chat</span> vs <span class="code">API/enterprise</span> (changes which privacy citations/notes are used for scoring).</li>
+        <li>Not legal advice. Not emissions accounting.</li>
       </ul>
-      <div class="small">Want next: a cleaner data model + a page per model + a public methodology page.</div>
+      <div class="small">Read more: <a href="./methodology.html">Methodology</a> • <a href="./sustainability.html">Sustainability notes</a> • <a href="./sustainability-estimates.md" target="_blank" rel="noopener">Raw sources</a></div>
     </div>
   </div>
 

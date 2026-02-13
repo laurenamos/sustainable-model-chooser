@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Methodology — Sustainable Model Chooser</title>
+  <link rel="stylesheet" href="./styles.css"/>
+  <style>
+    .prose{line-height:1.6}
+    .prose h1{font-size:22px;margin:0 0 10px 0}
+    .prose h2{font-size:16px;margin:18px 0 8px 0}
+    .prose h3{font-size:14px;margin:14px 0 6px 0}
+    .muted{color:var(--muted)}
+    .callout{border:1px solid var(--border);background:rgba(116,192,252,.06);border-radius:12px;padding:12px}
+    .callout.warn{background:rgba(255,184,107,.08)}
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;color:#d4e0ff}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <div class="h1">Methodology <span class="badge">beta</span></div>
+        <div class="sub">How this site scores models, what data is used, and what is intentionally not claimed.</div>
+      </div>
+      <div class="small"><a href="./">← Back to chooser</a></div>
+    </header>
+
+    <div class="panel prose">
+      <div class="callout warn">
+        <b>Key disclaimer</b>
+        <div class="muted" style="margin-top:6px">
+          We do <b>not</b> claim precise <span class="kbd">CO2e per message</span> for consumer chat models.
+          Vendors rarely publish comparable per-model, per-token energy/carbon data.
+          Where we show “flights/year”, it is an <b>illustrative proxy</b> based on assumptions.
+        </div>
+      </div>
+
+      <h2>What we score</h2>
+      <ul>
+        <li><b>Affordability</b> — proxy from published <span class="kbd">$/MTok</span> token rates (API pages / OpenRouter metadata). Consumer subscriptions may differ.</li>
+        <li><b>Privacy & data controls</b> — scored on clarity, citations, and stated controls. (Not legal advice.)</li>
+        <li><b>Sustainability transparency</b> — scored on disclosure + verifiability (not footprint precision).</li>
+      </ul>
+
+      <h2>Consumer chat vs API/enterprise mode</h2>
+      <p class="muted">
+        The same model family can have different data handling terms depending on how you access it (consumer app vs enterprise product vs API).
+        This site provides a mode toggle because mixing those citations can be misleading.
+      </p>
+
+      <h2>Flights/year proxy</h2>
+      <p class="muted">
+        We translate your usage sliders into a rough “equivalent FIFO flights/year” range.
+        This is intended to communicate scale and uncertainty, not to replace carbon accounting.
+      </p>
+      <ul>
+        <li><b>Turns/day</b> and <b>tokens/turn</b> come from your sliders.</li>
+        <li><b>CO2e per 1K tokens</b> uses proxy tiers (low/medium/high) because vendors don’t disclose an official consumer-chat number.</li>
+        <li><b>Flight CO2e</b> uses a rough Perth↔Newman return range (0.4–0.6t) for intuition.</li>
+      </ul>
+      <p class="muted">Full assumptions and caveats live on the sustainability page: <a href="./sustainability.html">Sustainability notes</a>.</p>
+
+      <h2>Data sources</h2>
+      <ul>
+        <li><b>OpenRouter</b> model metadata endpoint (pricing/context/modality): <a href="https://openrouter.ai/api/v1/models" target="_blank" rel="noopener">/api/v1/models</a></li>
+        <li><b>Vendor pricing pages</b> (OpenAI / Anthropic / Google Vertex AI).</li>
+        <li><b>Vendor policy pages</b> (privacy/terms) for citations.</li>
+        <li><b>Academic references</b> and benchmarks (TokenPowerBench, From Prompts to Power, MLPerf) cited on the sustainability page.</li>
+      </ul>
+
+      <h2>What’s next</h2>
+      <ul>
+        <li>Improve consumer-specific privacy citations (Gemini/ChatGPT model training & retention details).</li>
+        <li>Add per-model pages with a “nutrition label”.</li>
+        <li>Replace proxy emissions tiers with vendor disclosures if/when they become available.</li>
+      </ul>
+    </div>
+
+    <div class="panel footer">
+      <b>Links</b>
+      <ul>
+        <li><a href="./">Chooser</a></li>
+        <li><a href="./sustainability.html">Sustainability notes</a></li>
+        <li><a href="./sustainability-estimates.md" target="_blank" rel="noopener">Raw sources (markdown)</a></li>
+        <li>Repo: <a href="https://github.com/laurenamos/sustainable-model-chooser" target="_blank" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
