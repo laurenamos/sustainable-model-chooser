@@ -18,6 +18,23 @@ function getMode(){
   return el ? el.value : 'consumer';
 }
 
+function getUsage(){
+  const turns = Number(document.querySelector('#turns')?.value ?? 100);
+  const tpt = Number(document.querySelector('#tpt')?.value ?? 1500);
+  return {turns, tpt};
+}
+
+function setUsageUI(turns, tpt){
+  const turnsEl = document.querySelector('#turns');
+  const tptEl = document.querySelector('#tpt');
+  const turnsVal = document.querySelector('#turnsVal');
+  const tptVal = document.querySelector('#tptVal');
+  if(turnsEl) turnsEl.value = String(turns);
+  if(tptEl) tptEl.value = String(tpt);
+  if(turnsVal) turnsVal.textContent = String(turns);
+  if(tptVal) tptVal.textContent = String(tpt);
+}
+
 function privacyBlock(model, mode){
   // mode: consumer | api
   const p = model.privacy || {};
@@ -101,10 +118,10 @@ function fmtRange(a,b,dp=2){
   return `${a.toFixed(dp)}–${b.toFixed(dp)}`;
 }
 
-function renderCard(model, score){
+function renderCard(model, score, usage){
   const priv = score.privBlock;
   const tier = model.sustainability?.intensityTier || 'medium';
-  const fe = flightsPerYearEstimate(tier, 100, 1500, [0.4,0.6]);
+  const fe = flightsPerYearEstimate(tier, usage.turns, usage.tpt, [0.4,0.6]);
   const tierLabel = tier==='low' ? 'Low (proxy)' : tier==='high' ? 'High (proxy)' : 'Medium (proxy)';
 
   return `
@@ -125,9 +142,9 @@ function renderCard(model, score){
 
     <div class="row">
       <span class="badge">Flights/year proxy</span>
-      <span class="small"><span class="code">${fmtRange(fe.flightsLow, fe.flightsHigh, 2)}</span> flights/yr <span class="k">(typical use)</span></span>
+      <span class="small"><span class="code">${fmtRange(fe.flightsLow, fe.flightsHigh, 2)}</span> flights/yr <span class="k">(your slider settings)</span></span>
     </div>
-    <div class="small">Assumes 100 turns/day, 1,500 tokens/turn, Perth↔Newman 0.4–0.6t CO2e, and <span class="code">${tierLabel}</span> gCO2e/1K tokens. <a href="./sustainability.html" target="_blank" rel="noopener">Details</a></div>
+    <div class="small">Assumes ${usage.turns} turns/day, ${usage.tpt} tokens/turn, Perth↔Newman 0.4–0.6t CO2e, and <span class="code">${tierLabel}</span> gCO2e/1K tokens. <a href="./sustainability.html" target="_blank" rel="noopener">Details</a></div>
 
     <hr/>
 
@@ -194,6 +211,8 @@ async function render(){
   const data = await loadModels();
   const models = data.models;
   const mode = getMode();
+  const usage = getUsage();
+  setUsageUI(usage.turns, usage.tpt);
 
   const costs = models.map(m=>affordabilityScore(m.pricing).cost);
   const cheapest = Math.min(...costs);
@@ -204,7 +223,7 @@ async function render(){
   }
 
   const sorted = [...models].sort((a,b)=>scores[b.key].total - scores[a.key].total);
-  rootCards.innerHTML = sorted.map(m=>renderCard(m, scores[m.key])).join('');
+  rootCards.innerHTML = sorted.map(m=>renderCard(m, scores[m.key], usage)).join('');
   rootTable.innerHTML = renderTable(sorted, scores);
 
   document.querySelector('#generatedAt').textContent = data.generatedAt;
@@ -212,9 +231,28 @@ async function render(){
 }
 
 async function main(){
+  // Load saved usage if present
+  const savedTurns = Number(localStorage.getItem('smc.turns') || '100');
+  const savedTpt = Number(localStorage.getItem('smc.tpt') || '1500');
+  setUsageUI(savedTurns, savedTpt);
+
   document.querySelectorAll('input[name="mode"]').forEach(el=>{
     el.addEventListener('change', ()=>render());
   });
+
+  const turnsEl = document.querySelector('#turns');
+  const tptEl = document.querySelector('#tpt');
+  const onSlider = ()=>{
+    const usage = getUsage();
+    localStorage.setItem('smc.turns', String(usage.turns));
+    localStorage.setItem('smc.tpt', String(usage.tpt));
+    document.querySelector('#turnsVal').textContent = String(usage.turns);
+    document.querySelector('#tptVal').textContent = String(usage.tpt);
+    render();
+  };
+  if(turnsEl) turnsEl.addEventListener('input', onSlider);
+  if(tptEl) tptEl.addEventListener('input', onSlider);
+
   await render();
 }
 

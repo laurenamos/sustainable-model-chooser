@@ -65,6 +65,25 @@
       </div>
     </div>
 
+    <div class="panel">
+      <b>Your usage (for flights/year proxy)</b>
+      <div class="small" style="margin-top:8px;line-height:1.6">
+        <div style="display:grid;grid-template-columns:1fr;gap:10px">
+          <div>
+            <div><b>Turns per day</b>: <span class="code" id="turnsVal">100</span></div>
+            <input id="turns" type="range" min="0" max="500" step="10" value="100" style="width:100%" />
+            <div class="small">1 turn = 1 message + 1 reply. (This only affects the flights/year proxy.)</div>
+          </div>
+          <div>
+            <div><b>Tokens per turn</b>: <span class="code" id="tptVal">1500</span></div>
+            <input id="tpt" type="range" min="250" max="5000" step="250" value="1500" style="width:100%" />
+            <div class="small">Rule of thumb: short Q&A ~250–750; drafting long text can be 2,000+.</div>
+          </div>
+        </div>
+        <div class="small" style="margin-top:8px">Assumptions + caveats: <a href="./sustainability.html" target="_blank" rel="noopener">Sustainability notes</a>.</div>
+      </div>
+    </div>
+
     <div class="grid" id="cards"></div>
 
     <div class="panel" id="table"></div>
