@@ -141,7 +141,7 @@ function renderCard(model, score, usage){
     </div>
 
     <div class="row">
-      <span class="badge">Flights/year proxy</span>
+      <span class="badge">Flights/year (illustrative)</span>
       <span class="small"><span class="code">${fmtRange(fe.flightsLow, fe.flightsHigh, 2)}</span> flights/yr <span class="k">(your slider settings)</span></span>
     </div>
     <div class="small">Assumes ${usage.turns} turns/day, ${usage.tpt} tokens/turn, Perth↔Newman 0.4–0.6t CO2e, and <span class="code">${tierLabel}</span> gCO2e/1K tokens. <a href="./sustainability.html" target="_blank" rel="noopener">Details</a></div>

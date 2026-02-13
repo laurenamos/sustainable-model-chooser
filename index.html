@@ -17,7 +17,8 @@
         </div>
       </div>
       <div class="small">
-        Data snapshot: <span class="code" id="generatedAt">—</span>
+        Data snapshot: <span class="code" id="generatedAt">—</span><br/>
+        OpenRouter pricing metadata synced: <span class="code" id="syncedAt">—</span>
       </div>
     </header>
 
@@ -40,18 +41,23 @@
         supported parameters, and a few provider flags (e.g. <span class="code">is_moderated</span>). It does <b>not</b> provide reliable per-model
         <span class="code">CO2e</span>, <span class="code">kWh</span>, water usage, or retention/training policy fields. This site therefore links to vendor policy pages as citations.
       </div>
-      <div class="small" style="margin-top:8px">OpenRouter pricing metadata synced: <span class="code" id="syncedAt">—</span></div>
-      <div class="small" style="margin-top:6px">Read more: <a href="./methodology.html">Methodology</a> • <a href="./sustainability.html">Sustainability notes</a></div>
+      <div class="small" style="margin-top:8px">
+        Read more: <a href="./methodology.html">Methodology</a> • <a href="./sustainability.html">Sustainability notes</a> •
+        <a href="https://github.com/laurenamos/sustainable-model-chooser/issues" target="_blank" rel="noopener">Contribute a source / report an issue</a>
+      </div>
     </div>
 
     <div class="panel">
-      <b>Scoring (v0)</b>
+      <b>Scoring</b>
       <ul class="small">
         <li><b>Affordability (40)</b>: proxy from published $/MTok. Assumes a typical chat turn of <span class="code">1K input</span> + <span class="code">500 output</span> tokens.</li>
         <li><b>Privacy & data controls (40)</b>: scored on clarity + citations + stated controls. Not legal advice.</li>
         <li><b>Sustainability transparency (20)</b>: focuses on disclosure + verifiability. We do <b>not</b> claim a precise CO2e per message.</li>
       </ul>
-      <div class="small">More detail: <a href="./sustainability.html">Sustainability notes (reader view)</a> • <a href="./sustainability-estimates.md" target="_blank" rel="noopener">raw sources (markdown)</a></div>
+      <div class="small">
+        How to read this: higher score = affordability (proxy) + clearer privacy citations + stronger sustainability disclosure.
+      </div>
+      <div class="small" style="margin-top:6px">More detail: <a href="./sustainability.html">Sustainability notes (reader view)</a> • <a href="./sustainability-estimates.md" target="_blank" rel="noopener">raw sources (markdown)</a></div>
       <div class="small" style="margin-top:10px">UX quality / speed testing is intentionally excluded for now.</div>
     </div>
 
