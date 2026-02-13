@@ -41,9 +41,68 @@ Benchmarks can compare **performance per watt**, but typically benchmark *system
 - **MLCommons / MLPerf Inference (Datacenter)**
   - https://mlcommons.org/benchmarks/inference-datacenter/
 
+## Chat model use vs FIFO flights per year (rough equivalence)
+This is a *back-of-envelope* comparison to make the scale intuitive. It is **not** a precise accounting.
+
+### Assumptions
+You can swap these numbers if you have better ones for your context.
+
+**A) A “typical chat turn”**
+- 1 turn = 1 user message + 1 assistant reply
+- Assumed tokens per turn: **1,500 tokens** (very rough; short chats are less, long drafting is more)
+
+**B) Emissions intensity of consumer chat**
+- Vendors generally **do not publish** CO2e per 1K tokens for consumer chat.
+- For illustration we show a wide range: **0.5–10 g CO2e per 1K tokens**.
+
+**C) Flight benchmark (FIFO)**
+- Return flight **Perth ↔ Newman**: assumed **0.4–0.6 t CO2e** (400–600 kg).
+  - Note: this depends on aircraft type, load factor, whether you apply radiative forcing, and the calculator/method used.
+
+### What this means in practice
+Below are “equivalent flights per year” for three usage levels.
+
+We compute:
+- tokens/day = turns/day × 1,500
+- CO2e/day = (tokens/day / 1,000) × (g CO2e per 1K tokens)
+- CO2e/year = CO2e/day × 365
+- flights/year = CO2e/year ÷ (0.4–0.6 t CO2e)
+
+#### Light use (~30 turns/day)
+- Tokens/day: ~45,000
+- CO2e/year (illustrative):
+  - **~8 kg** (at 0.5 g/1K)
+  - **~164 kg** (at 10 g/1K)
+- Flights/year equivalent (Perth↔Newman return):
+  - **~0.01–0.02 flights/year** (low intensity)
+  - **~0.27–0.41 flights/year** (high intensity)
+
+#### Typical use (~100 turns/day)
+- Tokens/day: ~150,000
+- CO2e/year (illustrative):
+  - **~27 kg** (at 0.5 g/1K)
+  - **~548 kg** (at 10 g/1K)
+- Flights/year equivalent:
+  - **~0.05–0.07 flights/year** (low intensity)
+  - **~0.9–1.4 flights/year** (high intensity)
+
+#### Heavy use (~300 turns/day)
+- Tokens/day: ~450,000
+- CO2e/year (illustrative):
+  - **~82 kg** (at 0.5 g/1K)
+  - **~1,643 kg** (at 10 g/1K)
+- Flights/year equivalent:
+  - **~0.14–0.21 flights/year** (low intensity)
+  - **~2.7–4.1 flights/year** (high intensity)
+
+### Caveats (why this is so uncertain)
+- The **big unknown** is CO2e per 1K tokens for *consumer chat*, because you can’t see the data center region, hardware, utilisation, and offsets.
+- Token counts vary a lot with attachments, long context, image/audio, and “thinking” modes.
+- Flight emissions vary by method; this comparison is for intuition, not accounting.
+
+If you have a source that provides model-specific CO2e/kWh/water or a better flight factor, please open an issue in the repo with the link.
+
 ## How we present this on the site
 - We label sustainability as **transparency + confidence** unless a vendor discloses model-level footprints.
 - We link sources for every claim.
 - We avoid fake precision.
-
-If you have a strong source that provides model-specific CO2e/kWh/water for one of these SKUs, please open an issue in the repo with the link.
