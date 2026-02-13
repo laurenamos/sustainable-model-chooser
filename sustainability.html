@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Sustainability notes — Sustainable Model Chooser</title>
+  <link rel="stylesheet" href="./styles.css"/>
+  <style>
+    .prose{line-height:1.6}
+    .prose h1{font-size:22px;margin:0 0 10px 0}
+    .prose h2{font-size:16px;margin:18px 0 8px 0}
+    .prose h3{font-size:14px;margin:14px 0 6px 0;color:var(--text)}
+    .prose p,.prose li{color:var(--text)}
+    .prose .muted{color:var(--muted)}
+    .callout{border:1px solid var(--border);background:rgba(116,192,252,.06);border-radius:12px;padding:12px}
+    .callout.warn{background:rgba(255,184,107,.08)}
+    .kpi{display:grid;grid-template-columns:1fr;gap:10px}
+    @media(min-width:900px){.kpi{grid-template-columns:1fr 1fr 1fr}}
+    .kpi .card{min-height:0}
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;color:#d4e0ff}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <div class="h1">Sustainability notes <span class="badge">v0</span></div>
+        <div class="sub">What we can and can’t say yet about energy / CO2e / water for consumer chat models, plus reputable benchmarks and estimation methods.</div>
+      </div>
+      <div class="small"><a href="./">← Back to chooser</a></div>
+    </header>
+
+    <div class="panel prose">
+      <div class="callout warn">
+        <b>TL;DR</b>
+        <div class="muted" style="margin-top:6px">
+          For consumer chat, there are <b>not</b> reputable, vendor-published numbers for <span class="kbd">kWh / CO2e / water per message</span>
+          for GPT‑5 mini, Claude Sonnet 4.5, or Gemini 2.5 Flash.
+          This page focuses on what’s <b>verifiable</b>, and labels everything else as estimation/proxy.
+        </div>
+      </div>
+
+      <h2>How we classify “metrics”</h2>
+      <ol>
+        <li><b>Disclosed (best)</b>: official vendor numbers for a specific model SKU.</li>
+        <li><b>Measurable (good)</b>: direct power measurement (mostly local models), + grid intensity.</li>
+        <li><b>Estimated (ok, caveated)</b>: standard tools/methods using runtime + hardware + grid mix.</li>
+        <li><b>Proxy (weak)</b>: transparency grades, provider commitments, efficiency benchmarks that don’t allocate to a specific consumer model.</li>
+      </ol>
+
+      <h2>What vendors disclose today (summary)</h2>
+      <div class="kpi">
+        <div class="card">
+          <div class="modelName">OpenAI (GPT‑5 mini)</div>
+          <div class="small">Model-specific energy/CO2e/water: <b>not disclosed</b> (in public sources we’ve found).</div>
+          <div class="small" style="margin-top:8px">Useful transparency reference:</div>
+          <div class="small"><a href="https://crfm.stanford.edu/fmti/May-2024/company-reports/OpenAI_GPT-4.html" target="_blank" rel="noopener">Stanford CRFM FMTI (OpenAI GPT‑4)</a></div>
+        </div>
+        <div class="card">
+          <div class="modelName">Anthropic (Sonnet 4.5)</div>
+          <div class="small">Model-specific energy/CO2e/water: <b>not disclosed</b> (in public sources we’ve found).</div>
+          <div class="small" style="margin-top:8px">Transparency reference:</div>
+          <div class="small"><a href="https://crfm.stanford.edu/fmti/May-2024/company-reports/Anthropic_Claude%203.html" target="_blank" rel="noopener">Stanford CRFM FMTI (Claude 3)</a></div>
+        </div>
+        <div class="card">
+          <div class="modelName">Google (Gemini 2.5 Flash)</div>
+          <div class="small">Model-specific energy/CO2e/water: <b>not disclosed</b> (in public sources we’ve found).</div>
+          <div class="small" style="margin-top:8px">Company reporting hub:</div>
+          <div class="small"><a href="https://sustainability.google/stories/" target="_blank" rel="noopener">Google Sustainability</a></div>
+        </div>
+      </div>
+
+      <h2>Benchmarks & measurement (inference-focused)</h2>
+      <ul>
+        <li>
+          <b>MLPerf Inference (Datacenter)</b> — systems-level performance benchmarking (some power work exists, but not model-per-message accounting).
+          <div class="small"><a href="https://mlcommons.org/benchmarks/inference-datacenter/" target="_blank" rel="noopener">mlcommons.org/benchmarks/inference-datacenter</a></div>
+        </li>
+        <li>
+          <b>TokenPowerBench (AAAI’26; arXiv:2512.03024)</b> — phase-aware inference power benchmarking (prefill vs decode), reporting e.g. <i>joules per token</i>. Evaluates open model series including <b>Llama</b>, <b>Qwen</b>, <b>Mistral</b>, <b>Falcon</b> (up to <b>Llama3‑405B</b>).
+          <div class="small"><a href="https://arxiv.org/abs/2512.03024v1" target="_blank" rel="noopener">arXiv:2512.03024</a></div>
+        </li>
+        <li>
+          <b>From Prompts to Power (arXiv:2511.05597)</b> — large-scale measurement study of prompt-level inference energy using vLLM (claims 32,500+ measurements, 21 GPU configs, 155 model architectures; includes very large models like <b>Llama 3.1 405B</b> and <b>DeepSeek V3/R1 (685B)</b>). Also describes a predictive model + browser extension (estimate, not disclosure).
+          <div class="small"><a href="https://arxiv.org/html/2511.05597" target="_blank" rel="noopener">arXiv:2511.05597 (HTML)</a></div>
+        </li>
+      </ul>
+
+      <h2>Estimation tools (practical)</h2>
+      <ul>
+        <li><b>CodeCarbon</b> — measure/estimate emissions from compute runs. <a href="https://github.com/mlco2/codecarbon" target="_blank" rel="noopener">GitHub</a></li>
+        <li><b>Green Algorithms</b> — methodology + calculator for computational footprints. <a href="https://www.green-algorithms.org/" target="_blank" rel="noopener">green-algorithms.org</a></li>
+        <li><b>Strubell et al. (2019)</b> — classic reference on energy/policy for deep learning in NLP. <a href="https://arxiv.org/abs/1910.09700" target="_blank" rel="noopener">arXiv:1910.09700</a></li>
+      </ul>
+
+      <h2>AI chat vs FIFO flights/year (rough intuition check)</h2>
+      <div class="small muted">This section is intentionally a range; see assumptions and caveats on the markdown source page.</div>
+      <div class="small" style="margin-top:8px">Open the full assumptions/calcs: <a href="./sustainability-estimates.md#chat-model-use-vs-fifo-flights-per-year-rough-equivalence" target="_blank" rel="noopener">chat vs flights/year</a></div>
+
+      <h2>Source of truth</h2>
+      <div class="small muted">The full, version-controlled notes live in <a href="./sustainability-estimates.md" target="_blank" rel="noopener">sustainability-estimates.md</a>.</div>
+    </div>
+
+    <div class="panel footer">
+      <b>Why a separate page?</b>
+      <ul>
+        <li>Markdown renders plainly on GitHub Pages; this page is a nicer “reader view”.</li>
+        <li>We keep the raw notes in markdown for easy editing + citations.</li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>
