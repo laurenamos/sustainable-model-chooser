@@ -46,6 +46,11 @@ Benchmarks can compare **performance per watt** (or **joules per token**), but t
   - They report evaluations across widely used open(-ish) model series including **Llama**, **Qwen**, **Mistral**, and **Falcon**, covering scales from ~1B parameters up to **Llama3‑405B**.
   - Note: this is an example of the kind of tooling needed; it does *not* currently provide an official rating for closed consumer models like GPT‑5 mini / Sonnet 4.5 / Gemini 2.5 Flash.
 
+- **From Prompts to Power (arXiv:2511.05597)** — large-scale, measurement-based study of **prompt-level inference energy** using the vLLM inference engine, spanning **32,500+ measurements**, **21 GPU configurations**, and **155 model architectures**.
+  - Paper: https://arxiv.org/html/2511.05597
+  - They report covering models up to very large open(-weight) systems including **Llama 3.1 405B** and **DeepSeek V3/R1 (685B)**.
+  - They also describe a **predictive model** for inference energy and a **browser extension** that estimates energy usage for online services (e.g., ChatGPT/Gemini/DeepSeek) — useful for awareness, but still an estimate rather than vendor disclosure.
+
 ## Chat model use vs FIFO flights per year (rough equivalence)
 This is a *back-of-envelope* comparison to make the scale intuitive. It is **not** a precise accounting.
 
