@@ -105,8 +105,13 @@
       <h3>Assumptions (editable)</h3>
       <ul>
         <li><b>Tokens per turn:</b> 1 turn (message + reply) ≈ <span class="kbd">1,500 tokens</span></li>
-        <li><b>Consumer chat emissions intensity:</b> <span class="kbd">0.5–10 g CO2e per 1K tokens</span> (illustrative range)</li>
         <li><b>Flight benchmark:</b> return Perth ↔ Newman ≈ <span class="kbd">0.4–0.6 t CO2e</span> (illustrative range)</li>
+        <li><b>Consumer chat emissions intensity:</b> vendors don’t disclose a reliable number, so we use proxy tiers:</li>
+      </ul>
+      <ul>
+        <li><b>Low tier (proxy):</b> <span class="kbd">0.5–2 g CO2e / 1K tokens</span> (e.g., “mini/flash” class)</li>
+        <li><b>Medium tier (proxy):</b> <span class="kbd">1–5 g CO2e / 1K tokens</span> (default)</li>
+        <li><b>High tier (proxy):</b> <span class="kbd">2–10 g CO2e / 1K tokens</span> (e.g., frontier/very large models)</li>
       </ul>
 
       <h3>Equivalent FIFO flights per year (illustrative)</h3>

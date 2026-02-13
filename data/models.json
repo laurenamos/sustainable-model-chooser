@@ -52,7 +52,8 @@
       "sustainability": {
         "notes": "No model-specific emissions disclosed in v0 sources.",
         "sources": [],
-        "confidence": "low"
+        "confidence": "low",
+        "intensityTier": "low"
       }
     },
     {
@@ -107,7 +108,8 @@
       "sustainability": {
         "notes": "No comparable per-model CO2e disclosure found in v0 sources.",
         "sources": [],
-        "confidence": "low"
+        "confidence": "low",
+        "intensityTier": "medium"
       }
     },
     {
@@ -167,7 +169,8 @@
         "sources": [
           "https://sustainability.google/stories/"
         ],
-        "confidence": "medium"
+        "confidence": "medium",
+        "intensityTier": "low"
       }
     },
     {
@@ -220,7 +223,8 @@
       "sustainability": {
         "notes": "No model-specific emissions disclosed in public sources we\u2019ve found.",
         "sources": [],
-        "confidence": "low"
+        "confidence": "low",
+        "intensityTier": "medium"
       }
     },
     {
@@ -275,7 +279,8 @@
       "sustainability": {
         "notes": "No comparable per-model CO2e disclosure found in v0 sources.",
         "sources": [],
-        "confidence": "low"
+        "confidence": "low",
+        "intensityTier": "high"
       }
     },
     {
@@ -335,7 +340,8 @@
         "sources": [
           "https://sustainability.google/stories/"
         ],
-        "confidence": "medium"
+        "confidence": "medium",
+        "intensityTier": "medium"
       }
     }
   ]

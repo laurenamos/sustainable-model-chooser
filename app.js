@@ -79,8 +79,34 @@ function overallScore(model, cheapestCost, mode){
   return {total, affCost: aff.cost, affRel, priv, sus, privBlock};
 }
 
+function tierToGRange(tier){
+  // Proxy ranges for consumer chat (g CO2e / 1K tokens).
+  // These are NOT vendor-published; they exist only to illustrate scale.
+  if(tier==='low') return [0.5, 2];
+  if(tier==='high') return [2, 10];
+  return [1, 5]; // medium
+}
+
+function flightsPerYearEstimate(tier, turnsPerDay=100, tokensPerTurn=1500, flightTonsRange=[0.4,0.6]){
+  const [gLow, gHigh] = tierToGRange(tier);
+  const tokensPerDay = turnsPerDay * tokensPerTurn;
+  const kgPerYearLow = (tokensPerDay/1000) * gLow * 365 / 1000;
+  const kgPerYearHigh = (tokensPerDay/1000) * gHigh * 365 / 1000;
+  const flightsLow = kgPerYearLow / (flightTonsRange[1]*1000); // divide by higher ton (0.6t) => lower flights
+  const flightsHigh = kgPerYearHigh / (flightTonsRange[0]*1000); // divide by lower ton (0.4t) => higher flights
+  return { flightsLow, flightsHigh };
+}
+
+function fmtRange(a,b,dp=2){
+  return `${a.toFixed(dp)}–${b.toFixed(dp)}`;
+}
+
 function renderCard(model, score){
   const priv = score.privBlock;
+  const tier = model.sustainability?.intensityTier || 'medium';
+  const fe = flightsPerYearEstimate(tier, 100, 1500, [0.4,0.6]);
+  const tierLabel = tier==='low' ? 'Low (proxy)' : tier==='high' ? 'High (proxy)' : 'Medium (proxy)';
+
   return `
   <div class="card">
     <div class="row">
@@ -96,6 +122,12 @@ function renderCard(model, score){
       <span class="badge">Affordability proxy</span>
       <span class="small">Typical turn cost: <span class="code">${fmtMoney(score.affCost)}</span></span>
     </div>
+
+    <div class="row">
+      <span class="badge">Flights/year proxy</span>
+      <span class="small"><span class="code">${fmtRange(fe.flightsLow, fe.flightsHigh, 2)}</span> flights/yr <span class="k">(typical use)</span></span>
+    </div>
+    <div class="small">Assumes 100 turns/day, 1,500 tokens/turn, Perth↔Newman 0.4–0.6t CO2e, and <span class="code">${tierLabel}</span> gCO2e/1K tokens. <a href="./sustainability.html" target="_blank" rel="noopener">Details</a></div>
 
     <hr/>
 
