@@ -94,8 +94,65 @@
       </ul>
 
       <h2>AI chat vs FIFO flights/year (rough intuition check)</h2>
-      <div class="small muted">This section is intentionally a range; see assumptions and caveats on the markdown source page.</div>
-      <div class="small" style="margin-top:8px">Open the full assumptions/calcs: <a href="./sustainability-estimates.md#chat-model-use-vs-fifo-flights-per-year-rough-equivalence" target="_blank" rel="noopener">chat vs flights/year</a></div>
+      <div class="callout warn">
+        <b>This is a rough range, not accounting.</b>
+        <div class="muted" style="margin-top:6px">
+          The big unknown is <span class="kbd">CO2e per 1K tokens</span> for consumer chat (vendors rarely disclose it).
+          Token counts vary wildly by how long your messages are, whether you attach files/images, and whether the model uses heavy “thinking” modes.
+        </div>
+      </div>
+
+      <h3>Assumptions (editable)</h3>
+      <ul>
+        <li><b>Tokens per turn:</b> 1 turn (message + reply) ≈ <span class="kbd">1,500 tokens</span></li>
+        <li><b>Consumer chat emissions intensity:</b> <span class="kbd">0.5–10 g CO2e per 1K tokens</span> (illustrative range)</li>
+        <li><b>Flight benchmark:</b> return Perth ↔ Newman ≈ <span class="kbd">0.4–0.6 t CO2e</span> (illustrative range)</li>
+      </ul>
+
+      <h3>Equivalent FIFO flights per year (illustrative)</h3>
+      <table class="table" style="margin-top:8px">
+        <thead>
+          <tr>
+            <th>Usage level</th>
+            <th>Turns/day</th>
+            <th>Tokens/day</th>
+            <th>CO2e/year (range)</th>
+            <th>Flights/year (range)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Light</b></td>
+            <td>~30</td>
+            <td>~45k</td>
+            <td>~8–164 kg</td>
+            <td>~0.01–0.41</td>
+          </tr>
+          <tr>
+            <td><b>Typical</b></td>
+            <td>~100</td>
+            <td>~150k</td>
+            <td>~27–548 kg</td>
+            <td>~0.05–1.37</td>
+          </tr>
+          <tr>
+            <td><b>Heavy</b></td>
+            <td>~300</td>
+            <td>~450k</td>
+            <td>~82–1,643 kg</td>
+            <td>~0.14–4.11</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="small muted" style="margin-top:10px">
+        Calculation notes:
+        tokens/day = turns/day × 1,500. CO2e scales with (tokens/1K) × (g CO2e per 1K tokens). Flights/year uses the 0.4–0.6 t flight range.
+      </div>
+
+      <div class="small" style="margin-top:8px">
+        Full caveats + the underlying numbers: <a href="./sustainability-estimates.md#chat-model-use-vs-fifo-flights-per-year-rough-equivalence" target="_blank" rel="noopener">see the raw notes</a>.
+      </div>
 
       <h2>Source of truth</h2>
       <div class="small muted">The full, version-controlled notes live in <a href="./sustainability-estimates.md" target="_blank" rel="noopener">sustainability-estimates.md</a>.</div>
