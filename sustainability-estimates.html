@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Sustainability estimates (raw sources) — Sustainable Model Chooser</title>
+  <link rel="stylesheet" href="./styles.css"/>
+  <style>
+    .prose{line-height:1.6}
+    .prose h1{font-size:22px;margin:0 0 10px 0}
+    .prose h2{font-size:16px;margin:18px 0 8px 0}
+    .prose h3{font-size:14px;margin:14px 0 6px 0}
+    .muted{color:var(--muted)}
+    .callout{border:1px solid var(--border);background:rgba(116,192,252,.06);border-radius:12px;padding:12px}
+    .callout.warn{background:rgba(255,184,107,.08)}
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;color:#d4e0ff}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <div class="h1">Sustainability estimates <span class="badge">raw sources</span></div>
+        <div class="sub">A readable version of <span class="code">sustainability-estimates.md</span> (version-controlled notes + citations).</div>
+      </div>
+      <div class="small"><a href="./">← Back to chooser</a></div>
+    </header>
+
+    <div class="panel prose">
+      <div class="callout warn">
+        <b>TL;DR</b>
+        <div class="muted" style="margin-top:6px">
+          For consumer chat, there are <b>not</b> reputable, vendor-published numbers for
+          <span class="kbd">kWh / CO2e / water per message</span> for common closed models.
+          This page focuses on what’s <b>verifiable</b>, and labels everything else as estimation/proxy.
+        </div>
+      </div>
+
+      <p class="muted" style="margin-top:10px">
+        If you’d rather read the curated summary, see <a href="./sustainability.html">Sustainability notes</a>.
+      </p>
+
+      <h2>How we separate claims</h2>
+      <ol>
+        <li><b>Disclosed (best):</b> official, vendor-published energy/CO2e/water for a specific model SKU.</li>
+        <li><b>Measurable (good):</b> direct power measurement (mostly local models), + grid intensity.</li>
+        <li><b>Estimated (ok, but caveated):</b> standard tools/methods using runtime + hardware + grid mix.</li>
+        <li><b>Proxy (weak):</b> transparency grades, provider commitments, and benchmarks that don’t allocate impact to a specific consumer model.</li>
+      </ol>
+
+      <h2>What the vendors disclose today</h2>
+
+      <h3>OpenAI</h3>
+      <ul>
+        <li>No model-level disclosure found for training energy, training CO2e, inference energy/CO2e per request/token, or water (in the public sources used here).</li>
+        <li>Stanford CRFM’s Foundation Model Transparency Index notes key training details are withheld even for GPT‑4 (e.g., compute/hardware), which makes footprint estimation difficult.</li>
+        <li>Source: <a href="https://crfm.stanford.edu/fmti/May-2024/company-reports/OpenAI_GPT-4.html" target="_blank" rel="noopener">Stanford CRFM FMTI (OpenAI GPT‑4)</a></li>
+      </ul>
+
+      <h3>Anthropic</h3>
+      <ul>
+        <li>No model-level disclosure found for training energy/CO2e, inference energy/CO2e per request/token, or water (in the public sources used here).</li>
+        <li>Stanford CRFM’s report for Claude 3 marks energy/carbon fields as not disclosed.</li>
+        <li>Source: <a href="https://crfm.stanford.edu/fmti/May-2024/company-reports/Anthropic_Claude%203.html" target="_blank" rel="noopener">Stanford CRFM FMTI (Anthropic Claude 3)</a></li>
+      </ul>
+
+      <h3>Google</h3>
+      <ul>
+        <li>No model-level disclosure found for training energy/CO2e, inference energy/CO2e per request/token, or water (in the public sources used here).</li>
+        <li>Google publishes extensive company-level sustainability reporting (useful, but not allocatable to a specific model interaction).</li>
+        <li>Source hub: <a href="https://sustainability.google/stories/" target="_blank" rel="noopener">sustainability.google/stories</a></li>
+      </ul>
+
+      <h2>Reputable ways to estimate (with caveats)</h2>
+      <p class="muted">These do <b>not</b> give an official “CO2e per message”, but are reputable starting points.</p>
+      <ul>
+        <li><b>CodeCarbon</b> — measure/estimate emissions from compute runs: <a href="https://github.com/mlco2/codecarbon" target="_blank" rel="noopener">github.com/mlco2/codecarbon</a></li>
+        <li><b>Green Algorithms</b> — methodology + calculator: <a href="https://www.green-algorithms.org/" target="_blank" rel="noopener">green-algorithms.org</a></li>
+        <li><b>Strubell et al. (2019)</b> — classic reference: <a href="https://arxiv.org/abs/1910.09700" target="_blank" rel="noopener">arXiv:1910.09700</a></li>
+      </ul>
+
+      <h2>Efficiency benchmarks (systems-level)</h2>
+      <p class="muted">
+        Benchmarks can compare <b>performance per watt</b> (or <b>joules per token</b>), but typically benchmark systems/implementations or open-weight models,
+        rather than attributing a footprint to a specific closed consumer chat model behind an API.
+      </p>
+      <ul>
+        <li><b>MLCommons / MLPerf Inference (Datacenter)</b>: <a href="https://mlcommons.org/benchmarks/inference-datacenter/" target="_blank" rel="noopener">mlcommons.org/benchmarks/inference-datacenter</a></li>
+        <li><b>TokenPowerBench (AAAI’26; arXiv:2512.03024)</b>: <a href="https://arxiv.org/abs/2512.03024v1" target="_blank" rel="noopener">arXiv:2512.03024</a></li>
+        <li><b>From Prompts to Power (arXiv:2511.05597)</b>: <a href="https://arxiv.org/html/2511.05597" target="_blank" rel="noopener">arXiv HTML</a></li>
+      </ul>
+
+      <h2 id="chat-model-use-vs-fifo-flights-per-year-rough-equivalence">Chat model use vs FIFO flights per year (rough equivalence)</h2>
+      <p class="muted">This is a back-of-envelope comparison to make scale intuitive. It is <b>not</b> precise accounting.</p>
+
+      <h3>Assumptions</h3>
+      <p class="muted">You can swap these numbers if you have better ones for your context.</p>
+      <ul>
+        <li><b>A) A “typical chat turn”</b>
+          <ul>
+            <li>1 turn = 1 user message + 1 assistant reply</li>
+            <li>Assumed tokens per turn: <b>1,500 tokens</b> (very rough)</li>
+          </ul>
+        </li>
+        <li><b>B) Emissions intensity of consumer chat</b>
+          <ul>
+            <li>Vendors generally <b>do not publish</b> CO2e per 1K tokens for consumer chat.</li>
+            <li>For illustration we show a wide range: <b>0.5–10 g CO2e per 1K tokens</b>.</li>
+          </ul>
+        </li>
+        <li><b>C) Flight benchmark (FIFO)</b>
+          <ul>
+            <li>Return flight <b>Perth ↔ Newman</b>: assumed <b>0.4–0.6 t CO2e</b> (400–600 kg).</li>
+            <li class="muted">Depends on aircraft type, load factor, radiative forcing, and the calculator/method used.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>What this means in practice</h3>
+      <p class="muted">Below are “equivalent flights per year” for three usage levels.</p>
+      <ul>
+        <li>tokens/day = turns/day × 1,500</li>
+        <li>CO2e/day = (tokens/day / 1,000) × (g CO2e per 1K tokens)</li>
+        <li>CO2e/year = CO2e/day × 365</li>
+        <li>flights/year = CO2e/year ÷ (0.4–0.6 t CO2e)</li>
+      </ul>
+
+      <h3>Light use (~30 turns/day)</h3>
+      <ul>
+        <li>Tokens/day: ~45,000</li>
+        <li>CO2e/year (illustrative): ~8 kg (at 0.5 g/1K) to ~164 kg (at 10 g/1K)</li>
+        <li>Flights/year equivalent: ~0.01–0.41 flights/year</li>
+      </ul>
+
+      <h3>Typical use (~100 turns/day)</h3>
+      <ul>
+        <li>Tokens/day: ~150,000</li>
+        <li>CO2e/year (illustrative): ~27 kg (at 0.5 g/1K) to ~548 kg (at 10 g/1K)</li>
+        <li>Flights/year equivalent: ~0.05–1.4 flights/year</li>
+      </ul>
+
+      <h3>Heavy use (~300 turns/day)</h3>
+      <ul>
+        <li>Tokens/day: ~450,000</li>
+        <li>CO2e/year (illustrative): ~82 kg (at 0.5 g/1K) to ~1,643 kg (at 10 g/1K)</li>
+        <li>Flights/year equivalent: ~0.14–4.1 flights/year</li>
+      </ul>
+
+      <h3>Caveats</h3>
+      <ul>
+        <li>The big unknown is CO2e per 1K tokens for consumer chat (you can’t see data center region, hardware, utilisation, offsets).</li>
+        <li>Token counts vary a lot with attachments, long context, image/audio, and “thinking” modes.</li>
+        <li>Flight emissions vary by method; this is for intuition, not accounting.</li>
+      </ul>
+
+      <p class="muted">
+        If you have a source that provides model-specific CO2e/kWh/water or a better flight factor, please open an issue in the repo.
+      </p>
+    </div>
+
+    <div class="panel footer">
+      <b>Notes</b>
+      <ul>
+        <li>This page is generated manually for readability; the editable source is <span class="code">sustainability-estimates.md</span> in the repo.</li>
+        <li><a href="./sustainability.html">Sustainability notes</a> is the curated summary.</li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>

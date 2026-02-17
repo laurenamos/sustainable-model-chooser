@@ -18,7 +18,7 @@ Open: http://localhost:8000
 - Clearly labels unknowns / proxies (especially sustainability)
 
 ## Data sources
-- Pricing + context length for many models can be pulled from OpenRouter's public `/api/v1/models` endpoint.
+- Pricing + context length for many models can be pulled from a public model directory endpoint (currently OpenRouter’s `/api/v1/models`).
 - Vendor policy pages (privacy/data retention) are linked as citations.
 
 ## Notes

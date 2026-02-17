@@ -130,7 +130,7 @@ function renderCard(model, score, usage){
       <div>
         <div class="modelName">${model.displayName}</div>
         <div class="small">Chat surface: <span class="code">${model.chatSurface}</span></div>
-        ${model.openrouter?.id ? `<div class="small">OpenRouter id: <span class="code">${model.openrouter.id}</span></div>` : ''}
+        ${model.openrouter?.id ? `<div class="small">Directory id: <span class="code">${model.openrouter.id}</span></div>` : ''}
       </div>
       <div class="score">${Math.round(score.total)}</div>
     </div>
@@ -161,7 +161,7 @@ function renderCard(model, score, usage){
       ${renderSources(priv?.sources)}
       <div class="small" style="margin-top:6px"><b>Sustainability</b>:</div>
       ${renderSources(model.sustainability.sources)}
-      ${model.openrouter?.source ? `<div class="small" style="margin-top:6px"><b>OpenRouter metadata</b>: <a href="${model.openrouter.source}" target="_blank" rel="noopener">${model.openrouter.source}</a></div>` : ''}
+      ${model.openrouter?.source ? `<div class="small" style="margin-top:6px"><b>Directory metadata</b>: <a href="${model.openrouter.source}" target="_blank" rel="noopener">${model.openrouter.source}</a></div>` : ''}
     </details>
   </div>`;
 }
